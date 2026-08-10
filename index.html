@@ -3,100 +3,220 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的个人网页</title>
+    <title>我的进阶个人主页</title>
     <style>
-        /* 页面整体样式 */
+        /* 1. 全局变量定义（主题颜色） */
+        :root {
+            --bg-color: #f4f6f9;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --accent-color: #4A90E2;
+            --nav-bg: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+        }
+
+        /* 暗黑模式样式类 */
+        body.dark-mode {
+            --bg-color: #1a1a2e;
+            --card-bg: #16213e;
+            --text-color: #e0e0e0;
+            --nav-bg: #0f3460;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+        }
+
+        /* 2. 基础页面设置 */
+        * {
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
         body {
             font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
             line-height: 1.6;
             margin: 0;
             padding: 0;
-            background-color: #f4f6f9;
-            color: #333;
+            background-color: var(--bg-color);
+            color: var(--text-color);
         }
 
-        /* 顶部导航/标题栏 */
-        header {
-            background-color: #4A90E2;
+        /* 3. 导航栏 */
+        nav {
+            position: sticky;
+            top: 0;
+            background-color: var(--nav-bg);
+            box-shadow: var(--shadow);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .logo {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--accent-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+        }
+
+        /* 切换按钮 */
+        .theme-toggle {
+            cursor: pointer;
+            border: none;
+            background: var(--accent-color);
             color: white;
-            text-align: center;
-            padding: 2rem 1rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
         }
 
-        /* 内容主体容器 */
+        /* 4. Hero 横幅区 */
+        .hero {
+            text-align: center;
+            padding: 4rem 1rem;
+            background: linear-gradient(135deg, #4A90E2, #50E3C2);
+            color: white;
+        }
+
+        /* 5. 主体容器与网格 */
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 2rem auto;
             padding: 0 1rem;
         }
 
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
         /* 卡片样式 */
         .card {
-            background: white;
+            background: var(--card-bg);
             padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin-bottom: 1.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
         }
 
-        /* 按钮样式 */
-        .btn {
-            display: inline-block;
-            background-color: #4A90E2;
+        /* 6. 表单样式 */
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input, 
+        .form-group textarea {
+            width: 100%;
+            padding: 0.6rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            background: var(--card-bg);
+            color: var(--text-color);
+        }
+
+        .btn-submit {
+            background: var(--accent-color);
             color: white;
-            padding: 0.6rem 1.2rem;
-            text-decoration: none;
-            border-radius: 4px;
-            transition: background-color 0.3s;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
         }
 
-        .btn:hover {
-            background-color: #357ABD;
-        }
-
-        /* 页脚样式 */
+        /* 7. 页脚 */
         footer {
             text-align: center;
-            padding: 1rem;
-            color: #777;
+            padding: 2rem;
+            opacity: 0.8;
             font-size: 0.9rem;
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>欢迎来到我的主页</h1>
-        <p>这是一个用 HTML 和 CSS 打造的简单网页</p>
+    <nav>
+        <div class="logo">MyWebsite</div>
+        <div class="nav-links">
+            <a href="#about">关于</a>
+            <a href="#services">服务</a>
+            <a href="#contact">联系</a>
+            <button class="theme-toggle" onclick="toggleTheme()">🌓 切换主题</button>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1>探索现代网页设计</h1>
+        <p>支持响应式布局与主题模式切换</p>
     </header>
 
     <div class="container">
         
-        <div class="card">
-            <h2>关于我</h2>
-            <p>你好！我正在学习网页制作。这个页面是一个基础的代码示例，用来展示页面布局和样式。</p>
-        </div>
+        <section id="about">
+            <h2>功能特色</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>⚡ 快速加载</h3>
+                    <p>优化过的轻量级 CSS 与原生 JS 交互。</p>
+                </div>
+                <div class="card">
+                    <h3>📱 响应式适配</h3>
+                    <p>自动适应手机、平板及桌面电脑屏幕。</p>
+                </div>
+                <div class="card">
+                    <h3>🌙 深色模式</h3>
+                    <p>点击导航栏按钮即可随时体验舒适暗色界面。</p>
+                </div>
+            </div>
+        </section>
 
-        <div class="card">
-            <h2>我的兴趣</h2>
-            <ul>
-                <li>💻 编写代码与创造新东西</li>
-                <li>📚 阅读与学习新知识</li>
-                <li>🎮 游戏与休闲娱乐</li>
-            </ul>
-        </div>
-
-        <div class="card">
-            <h2>联系方式</h2>
-            <p>如果你想了解更多，欢迎点击下方按钮联系我：</p>
-            <a href="#" class="btn">发邮件给我</a>
-        </div>
+        <section id="contact" class="card">
+            <h2>留言联系</h2>
+            <form onsubmit="alert('消息已发送！'); return false;">
+                <div class="form-group">
+                    <label for="name">姓名</label>
+                    <input type="text" id="name" placeholder="请输入你的姓名" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">邮箱</label>
+                    <input type="email" id="email" placeholder="你的邮箱地址" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">内容</label>
+                    <textarea id="message" rows="4" placeholder="写下你的留言..."></textarea>
+                </div>
+                <button type="submit" class="btn-submit">发送消息</button>
+            </form>
+        </section>
 
     </div>
 
     <footer>
-        <p>&copy; 2026 我的个人网站. 保留所有权利。</p>
+        <p>&copy; 2026 MyWebsite. Powered by HTML & CSS.</p>
     </footer>
 
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+        }
+    </script>
 </body>
 </html>
